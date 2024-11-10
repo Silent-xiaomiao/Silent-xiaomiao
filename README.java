@@ -1,6 +1,6 @@
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.io.IOException;
+import java.nio.file.*;
+import java.util.function.Function;
 
 public class WriteReadme {
     public static void main(String[] args) {
@@ -14,19 +14,22 @@ public class WriteReadme {
         - ⚡ Fun fact: ...
 
         <!---
-        Silent-xiaomiao/Silent-xiaomiao is a ✨ special ✨ repository because its `README.java` (this file) appears on your GitHub profile.
+        Silent-xiaomiao/Silent-xiaomiao is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
         You can click the Preview link to take a look at your changes.
         --->""";
 
+        Path path = Paths.get("README.md");
         try {
-            // 指定文件路径
-            String filePath = "README.java";
-            // 将字符串内容写入文件
-            Files.write(Paths.get(filePath), content.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-            System.out.println("README.java 文件创建成功，内容已写入。");
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("写入文件时发生错误。");
+            Files.write(path, content.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+            System.out.println("README.md 文件创建成功，内容已写入。");
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
         }
+    }
+}
+
+class UncheckedIOException extends RuntimeException {
+    public UncheckedIOException(IOException cause) {
+        super(cause);
     }
 }
