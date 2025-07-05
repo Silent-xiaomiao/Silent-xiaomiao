@@ -21,7 +21,7 @@ public class WriteReadme {
         Path path = Paths.get("README.md");
         try {
             Files.write(path, content.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-            System.out.println("README.md 文件创建成功，内容已写入。");
+            System.out.println("README.md The file was created successfully.");
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
